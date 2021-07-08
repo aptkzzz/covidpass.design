@@ -126,3 +126,4 @@ STATICFILES_DIRS = [
     BASE_DIR / "static", 'static/',
     ]
 STATIC_URL = '/static/'
+GOSUSLUGI_PATH = 'https://www.gosuslugi.ru/vaccine/cert/verify/'
