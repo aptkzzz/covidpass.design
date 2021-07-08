@@ -1,0 +1,48 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'covidpass/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'covidpass/style.css' %}">
+    <title>Обложки для паспорта с QR-кодами</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>Обложки для паспорта с QR-кодами</h1>
+        </div>
+      </div>
+      <div clss="row">
+        <div class="col-12">
+          <div class="card-deck">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Закидывай ссылку</h5>
+                <p class="card-text">Скопируй ссылку на сертификат вакцинации в форму. Так мы сможем добавить его на твою обложку.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Кастомизируй</h5>
+                <p class="card-text">Выбирай фон, текст, цвет и эмодзи чтобы сделать свою обложку максимально уникальной!</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Заказывай</h5>
+                <p class="card-text">Оформляй заказ, мы напишем тебе в Instagram чтобы уточнить детали заказа.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'covidpass/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="{% static 'covidpass/popper.min.js' %}"></script>
+    <script src="{% static 'covidpass/bootstrap.min.js' %}"></script>
+    <script src="{% static 'covidpass/app.js' %}"></script>
+  </body>
+</html>
