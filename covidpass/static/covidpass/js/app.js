@@ -78,8 +78,8 @@ var textNode = new Konva.Text({
     fontStyle: 'normal',
     text: 'РОССИЯ\nБУДЕТ\nЗДОРОВОЙ',
     height: stage.height(),
-    width: stage.width() / 2,
-    x: 0,
+    width: stage.width() / 32 * 14,
+    x: stage.width() / 32 * 1,
     y: 0,
     align: 'center',
     verticalAlign: 'middle',
@@ -128,6 +128,10 @@ function QRCodeSelected() {
 }
 
 function QRGeneratorCallback(data) {
+    if (data.error) {
+        alert(data.error);
+        return null;
+    }
     for (const index in [...Array(6).keys()]) {
         QRCodes[Number(index)] = data[`image_${Number(index) + 1}`];
     }
