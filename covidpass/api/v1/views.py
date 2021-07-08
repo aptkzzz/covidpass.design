@@ -42,7 +42,14 @@ class GenerateQRView(CreateAPIView):
     def create(self, request, *args, **kwargs):
         GOSUSLUGI_PATH = 'https://www.gosuslugi.ru/vaccine/cert/verify/'
 
-        link = request.data['link']
+        link = request.data['link'].split("?")[0]
+        trial_object = QR.objects.filter(link=link).first()
+        if trial_object is not None:
+            return Response(dict(zip(
+                [f"image_{n}" for n in range(1, 7)],
+                [getattr(trial_object, f"qr_{n}").url for n in range(1, 7)]
+            )))
+
         if not link.startswith(GOSUSLUGI_PATH):
             return Response({
                 'error': 'Сертификат зарегистрирован не на официальном сайте Госуслуг.',
