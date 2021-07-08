@@ -1,0 +1,7 @@
+.qr-variants-holder {
+    overflow: hidden;
+    max-height: 0;
+    transition-property: max-height;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}

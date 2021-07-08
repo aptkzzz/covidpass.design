@@ -53,16 +53,42 @@
       </div>
       <div class="row">
         <div class="col-12 col-md-10 offset-md-1">
-          <form>
+          <form id="certificateLinkForm">
             <div class="row">
               <div class="col-8">
                 <input type="url" class="form-control form-control-lg w-100" id="certificateLink" placeholder="https://www.gosuslugi.ru/vaccine/cert/verify/">
               </div>
               <div class="col-4">
-                <button type="button" class="btn btn-lg btn-dark px-2 w-100" id="submitCertificate">Отправить</button>
+                <button type="submit" class="btn btn-lg btn-dark px-2 w-100">Отправить</button>
               </div>
             </div>
           </form>
+        </div>
+      </div>
+      <div class="row qr-variants-holder">
+        <div class="col-12">
+          <hr class="pb-2">
+        </div>
+        <div class="col-12 text-center">
+          <h3 class="my-3">Выбирай вариант QR-кода</h3>
+        </div>
+        <div class="col-6 col-md-4">
+          <img id="QR1" class="img-fluid rounded">
+        </div>
+        <div class="col-6 col-md-4">
+          <img id="QR2" class="img-fluid rounded">
+        </div>
+        <div class="col-6 col-md-4">
+          <img id="QR3" class="img-fluid rounded">
+        </div>
+        <div class="col-6 col-md-4">
+          <img id="QR4" class="img-fluid rounded">
+        </div>
+        <div class="col-6 col-md-4">
+          <img id="QR5" class="img-fluid rounded">
+        </div>
+        <div class="col-6 col-md-4">
+          <img id="QR6" class="img-fluid rounded">
         </div>
       </div>
       <hr class="pb-2">
@@ -77,21 +103,35 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-md-6 text-center">
+          <h4>Стилизация текста</h4>
           <form>
-            <div class="row">
-              <div class="col-8">
-                <input type="text" class="form-control form-control-lg w-100" id="textInput" placeholder="Ваш текст">
+            <input type="text" name="link" class="form-control w-100 my-1" id="textInput" placeholder="Ваш текст">
+            <p class="mb-0">Стиль текста:</p>
+            <select class="form-control w-100 my-1" id="textStyle">
+              <option value="normal" selected>Обычный</option>
+              <option value="bold">Жирный</option>
+              <option value="italic">Курсивом</option>
+              <option value="italic bold">Жирный курсивом</option>
+            </select>
+            <p class="mb-0">Размер текста:</p>
+            <div class="row m-0 p-0">
+              <div class="col-1 m-0 p-0 text-center">
+                <span>20</span>
               </div>
-              <div class="col-4">
-                <button type="button" class="btn btn-lg btn-dark px-2 w-100" id="submitText">Сохранить</button>
+              <div class="col-10 m-0 p-0">
+                <input class="w-100 mt-1" type="range" min="20" max="100" step=5 id="textSize">
+              </div>
+              <div class="col-1 m-0 p-0 text-center">
+                <span>100</span>
               </div>
             </div>
+            <button type="button" class="btn btn-lg btn-dark px-2 w-100 my-1" id="submitText">Сохранить</button>
           </form>
         </div>
       </div>
     </div>
-    <script src="{% static 'covidpass/js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="{% static 'covidpass/js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'covidpass/js/popper.min.js' %}"></script>
     <script src="{% static 'covidpass/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'covidpass/js/konva.min.js' %}"></script>
