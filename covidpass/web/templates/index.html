@@ -4,18 +4,24 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="{% static 'covidpass/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'covidpass/style.css' %}">
+    <link rel="stylesheet" href="{% static 'covidpass/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'covidpass/css/style.css' %}">
     <title>Обложки для паспорта с QR-кодами</title>
   </head>
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-12">
-          <h1>Обложки для паспорта с QR-кодами</h1>
+        <div class="col-12 text-center">
+          <h1 class="my-5">Обложки для паспорта с QR-кодами</h1>
         </div>
       </div>
-      <div clss="row">
+      <hr class="pb-2">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3 class="my-3">Что делать?</h3>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-12">
           <div class="card-deck">
             <div class="card">
@@ -33,16 +39,62 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Заказывай</h5>
-                <p class="card-text">Оформляй заказ, мы напишем тебе в Instagram чтобы уточнить детали заказа.</p>
+                <p class="card-text">Мы напишем тебе в Instagram чтобы уточнить детали заказа.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <hr class="pb-2">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3 class="my-3">Закидывай ссылку</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-10 offset-md-1">
+          <form>
+            <div class="row">
+              <div class="col-8">
+                <input type="url" class="form-control form-control-lg w-100" id="certificateLink" placeholder="https://www.gosuslugi.ru/vaccine/cert/verify/">
+              </div>
+              <div class="col-4">
+                <button type="button" class="btn btn-lg btn-dark px-2 w-100" id="submitCertificate">Отправить</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <hr class="pb-2">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3 class="my-3">Кастомизируй</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div id="canvasContainer" class="w-100 my-4"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <form>
+            <div class="row">
+              <div class="col-8">
+                <input type="text" class="form-control form-control-lg w-100" id="textInput" placeholder="Ваш текст">
+              </div>
+              <div class="col-4">
+                <button type="button" class="btn btn-lg btn-dark px-2 w-100" id="submitText">Сохранить</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <script src="{% static 'covidpass/jquery-3.2.1.slim.min.js' %}"></script>
-    <script src="{% static 'covidpass/popper.min.js' %}"></script>
-    <script src="{% static 'covidpass/bootstrap.min.js' %}"></script>
-    <script src="{% static 'covidpass/app.js' %}"></script>
+    <script src="{% static 'covidpass/js/jquery-3.2.1.slim.min.js' %}"></script>
+    <script src="{% static 'covidpass/js/popper.min.js' %}"></script>
+    <script src="{% static 'covidpass/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'covidpass/js/konva.min.js' %}"></script>
+    <script src="{% static 'covidpass/js/app.js' %}"></script>
   </body>
 </html>
