@@ -41,14 +41,11 @@ class GenerateQRView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         GOSUSLUGI_PATH = 'https://www.gosuslugi.ru/vaccine/cert/verify/'
-
+        nums = list(range(1, 7))
         link = request.data['link'].split("?")[0]
         trial_object = QR.objects.filter(link=link).first()
         if trial_object is not None:
-            return Response(dict(zip(
-                [f"image_{n}" for n in range(1, 7)],
-                [getattr(trial_object, f"qr_{n}").url for n in range(1, 7)]
-            )))
+            return Response({f"image_{n}": getattr(trial_object, f"qr_{n}").url for n in nums})
 
         if not link.startswith(GOSUSLUGI_PATH):
             return Response({
@@ -59,13 +56,7 @@ class GenerateQRView(CreateAPIView):
         # Генерация QR-кода
         self.generate_qr(cert_id)
 
-        kwargs = dict(zip(
-            [f"qr_{n}" for n in range(1, 7)],
-            [f"static/qrs/{cert_id}_{n}.png" for n in range(1, 7)]
-        ))
+        kwargs = {f"qr_{n}": f"static/qrs/{cert_id}_{n}.png" for n in nums}
         QR.objects.create(link=link, **kwargs)
 
-        return Response(dict(zip(
-            [f"image_{n}" for n in range(1, 7)],
-            [kwargs[f"qr_{n}"] for n in range(1, 7) ]
-        )))
+        return Response({f"image_{n}": kwargs[f"qr_{n}"] for n in nums})
