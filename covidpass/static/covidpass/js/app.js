@@ -216,3 +216,4 @@ $('#submitText').click(submitTextHandler);
 $('#certificateLinkForm').submit(onCertificateFormSubmit);
 $('#randomTextButton').click(randomText);
 $('#randomEmojiButton').click(randomEmojis);
+randomEmojis();
