@@ -3,10 +3,12 @@ var QRCodes = [
     "data:image/gif;base64,R0lGODlhAQABAIAAAP7//wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==",
     "", "", "", "", ""
 ];
-var defaultTexts = ["РОССИЯ\nБУДЕТ\nЗДОРОВОЙ", ""];
-var emojiSet = [];
-
-var currentEmojis = [];
+var defaultTexts = ["ВАШ\nТЕКСТ", "РОССИЯ\nБУДЕТ\nЗДОРОВОЙ", "Я\nПРИВИТ"];
+var emojis = [new Image(), new Image(), new Image()];
+for (var i = 0; i < 3; i++) {
+    emojis[i].src = QRCodes[0];
+}
+var currentEmojiIndex = 0;
 var currentQRCode = QRCodes[0];
 
 var canvasContainer = $('#canvasContainer');
@@ -38,12 +40,39 @@ var passportTemplateImage = new Konva.Image({
 
 passportTemplateLayer.add(passportTemplateImage);
 
-var textLayer = new Konva.Layer({});
-
 var emojiLayer = new Konva.Layer({});
+var emojiNode1 = new Konva.Image({
+    image: emojis[0],
+    x: stage.width() / 8 * 5,
+    y: stage.height() / 4,
+    width: stage.width() / 32 * 3,
+    height: stage.width() / 32 * 3,
+    offsetX: stage.width() / 64 * 3,
+    offsetY: stage.width() / 64 * 3
+});
+var emojiNode2 = new Konva.Image({
+    image: emojis[1],
+    x: stage.width() / 8 * 6,
+    y: stage.height() / 4,
+    width: stage.width() / 32 * 3,
+    height: stage.width() / 32 * 3,
+    offsetX: stage.width() / 64 * 3,
+    offsetY: stage.width() / 64 * 3
+});
+var emojiNode3 = new Konva.Image({
+    image: emojis[2],
+    x: stage.width() / 8 * 7,
+    y: stage.height() / 4,
+    width: stage.width() / 32 * 3,
+    height: stage.width() / 32 * 3,
+    offsetX: stage.width() / 64 * 3,
+    offsetY: stage.width() / 64 * 3
+});
+emojiLayer.add(emojiNode1);
+emojiLayer.add(emojiNode2);
+emojiLayer.add(emojiNode3);
 
 var QRLayer = new Konva.Layer({});
-
 var QRRect = new Konva.Rect({
     fill: '#ffffff',
     cornerRadius: stage.width() / 64 * 3,
@@ -54,12 +83,8 @@ var QRRect = new Konva.Rect({
     offsetX: stage.width() / 64 * 9,
     offsetY: stage.width() / 64 * 9
 });
-
-QRLayer.add(QRRect);
-
 var qr_img = new Image();
 qr_img.src = currentQRCode;
-
 var QRImage = new Konva.Image({
     image: qr_img,
     x: stage.width() / 4 * 3,
@@ -69,14 +94,15 @@ var QRImage = new Konva.Image({
     offsetX: stage.width() / 8,
     offsetY: stage.width() / 8
 });
-
+QRLayer.add(QRRect);
 QRLayer.add(QRImage);
 
+var textLayer = new Konva.Layer({});
 var textNode = new Konva.Text({
     fontFamily: 'sans-serif',
     fontSize: 60,
     fontStyle: 'normal',
-    text: 'РОССИЯ\nБУДЕТ\nЗДОРОВОЙ',
+    text: defaultTexts[0],
     height: stage.height(),
     width: stage.width() / 32 * 14,
     x: stage.width() / 32 * 1,
@@ -85,11 +111,12 @@ var textNode = new Konva.Text({
     verticalAlign: 'middle',
     fill: '#ffffff'
 });
-
 textLayer.add(textNode);
+
 stage.add(passportTemplateLayer);
-stage.add(textLayer);
+stage.add(emojiLayer);
 stage.add(QRLayer);
+stage.add(textLayer);
 
 function updateText(text, style, size) {
     textNode.setAttrs({
@@ -100,7 +127,7 @@ function updateText(text, style, size) {
     textNode.draw();
 }
 
-function submitTextHandler(event) {
+function submitTextHandler() {
     updateText(
         $('#textInput').val(),
         $('#textStyle').val(),
@@ -155,6 +182,37 @@ function onCertificateFormSubmit(event) {
     });
 }
 
+function createModalOpenerCallback(index) {
+    return () => {
+        currentEmojiIndex = index;
+        $('#emojiModal').modal('show');
+    }
+}
+
+function selectEmoji() {
+    emojis[currentEmojiIndex].src = $(this).attr('src');
+    $('#emojiModal').modal('hide');
+}
+
+function randomText() {
+    var text = defaultTexts[Math.floor(Math.random()*defaultTexts.length)];
+    $('#textInput').val(text);
+    submitTextHandler();
+}
+
+function randomEmojis() {
+    for (var i = 0; i < 3; i++) {
+        emojis[i].src = emojiList[Math.floor(Math.random()*emojiList.length)];
+    }
+}
+
+emojiNode1.on('click', createModalOpenerCallback(0));
+emojiNode2.on('click', createModalOpenerCallback(1));
+emojiNode3.on('click', createModalOpenerCallback(2));
+
+putEmojisIntoModal(selectEmoji);
 addListenersToQRVariants();
 $('#submitText').click(submitTextHandler);
 $('#certificateLinkForm').submit(onCertificateFormSubmit);
+$('#randomTextButton').click(randomText);
+$('#randomEmojiButton').click(randomEmojis);
